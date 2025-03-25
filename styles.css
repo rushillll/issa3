@@ -1,0 +1,90 @@
+* 
+{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body 
+{
+  background-color: white;
+  color: black;
+  padding: 20px;
+}
+
+header 
+{
+  background-color: purple;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+section 
+{
+  margin: 20px 0;
+  padding: 20px;
+  border: 2px solid purple;
+}
+
+#about 
+{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#about p 
+{
+  flex: 1;
+}
+
+#about .images 
+{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#about img 
+{
+  width: 200px;
+  height: auto;
+  border-radius: 10px;
+}
+
+h1 
+{
+  font-size: 2.5rem;
+}
+
+h2 
+{
+  color: purple;
+}
+
+p, li 
+{
+  font-size: 1rem;
+}
+
+#cv a 
+{
+  color: purple;
+  text-decoration: none;
+}
+
+#cv a:hover 
+{
+  text-decoration: underline;
+}
+
+footer 
+{
+  background-color: purple;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
