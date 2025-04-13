@@ -80,8 +80,8 @@ function analyzeText() {
   const specialCharCount = text.replace(/[a-z0-9\s]/gi, "").length;
 
   const pronouns = ["i", "you", "he", "she", "it", "we", "they", "me", "him", "her", "us", "them"];
-  const prepositions = ["in", "on", "at", "by", "for", "with", "about", "between"];
-  const articles = ["a", "an"];
+  const prepositions = ["in", "on", "at", "by", "for", "with", "about", "between", "above", "below"];
+  const articles = ["a", "an", "the"];
 
   const pronounCounts = countWords(text, pronouns);
   const prepositionCounts = countWords(text, prepositions);
