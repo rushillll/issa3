@@ -99,6 +99,69 @@ p, li {
   margin-bottom: 15px;
 }
 
+#text-analysis {
+  padding: 25px;
+}
+
+#text-input {
+  width: 100%;
+  height: 200px;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #282828;
+  color: white;
+  border: 1px solid #535353;
+  margin-bottom: 15px;
+  font-family: inherit;
+}
+
+#analyze-btn {
+  background-color: #1DB954;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+#analyze-btn:hover {
+  background-color: #1ED760;
+}
+
+#results {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.result-box {
+  background-color: #181818;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.result-box h3 {
+  color: #1DB954;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #535353;
+  padding-bottom: 8px;
+}
+
+.result-item {
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.highlight {
+  color: #1DB954;
+  font-weight: bold;
+}
+
 footer {
   background-color: #181818;
   color: #b3b3b3;
