@@ -61,10 +61,17 @@ document.addEventListener('click', function(event)
   logEvent('click', event.target)
 })
 
-document.getElementById('analyze-btn').onclick = analyzeText;
+const textInput = document.getElementById('text-input');
+const analyzeBtn = document.getElementById('analyze-btn');
+
+// Real-time analysis on input
+textInput.addEventListener('input', analyzeText);
+
+// Optional: Keep button for manual analysis
+analyzeBtn.addEventListener('click', analyzeText);
 
 function analyzeText() {
-  const text = document.getElementById('text-input').value;
+  const text = textInput.value;
   
   const letterCount = text.replace(/[^a-z]/gi, "").length;
   const wordCount = text.trim() === "" ? 0 : text.trim().split(/\s+/).length;
@@ -124,3 +131,5 @@ function showResults(boxId, title, wordCounts) {
   document.getElementById(boxId).innerHTML = html;
 }
 
+// Initial empty analysis
+analyzeText();
