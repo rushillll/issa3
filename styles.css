@@ -92,6 +92,11 @@ p, li {
 
 #cv a:hover {
   color: #1ed760;
+  text-decoration: underline;
+}
+
+#cv p {
+  margin-bottom: 15px;
 }
 
 footer {
