@@ -97,6 +97,18 @@ h2:hover {
   transform: translateX(5px);
 }
 
+h3 {
+  color: #1DB954;
+  margin: 30px 0 20px;
+  font-weight: 600;
+  font-size: 1.3rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+h3:hover {
+  color: #26e467;
+  transform: translateX(5px);
+}
+
 p, li {
   font-size: 1rem;
   margin-bottom: 10px;
@@ -108,6 +120,7 @@ p:hover, li:hover {
   color: #ffffff;
 }
 
+/* About Section */
 #about {
   position: relative;
 }
@@ -140,6 +153,47 @@ p:hover, li:hover {
 }
 .profile-image:hover img {
   transform: scale(1.1);
+}
+
+/* Where I Call Home Subsection */
+.subsection {
+  clear: both;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #333;
+}
+.photo-gallery {
+  display: flex;
+  gap: 20px;
+  margin: 25px 0;
+}
+.photo {
+  flex: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+.photo:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+}
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  display: block;
+}
+.photo:hover img {
+  transform: scale(1.1);
+}
+.hometown-text {
+  margin-top: 20px;
+  text-align: center;
+  font-style: italic;
+  width: 100%;
+  line-height: 1.8;
 }
 
 #education, #skills, #cv {
@@ -238,6 +292,7 @@ p:hover, li:hover {
   border-bottom: 1px solid #535353;
   padding-bottom: 8px;
   transition: color 0.3s ease;
+  margin-top: 0;
 }
 .result-box:hover h3 {
   color: #26e467;
@@ -322,6 +377,12 @@ li:hover:before {
   .profile-image {
     position: static;
     margin: 30px auto;
+  }
+  .photo-gallery {
+    flex-direction: column;
+  }
+  .photo {
+    margin-bottom: 15px;
   }
   #results {
     grid-template-columns: 1fr;
