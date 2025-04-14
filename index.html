@@ -1,153 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Text Analysis and Tokenizer</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
-
-    #results {
-      margin-top: 20px;
-      padding: 10px;
-      background-color: #f0f0f0;
-      border: 1px solid #ccc;
-      display: none;
-    }
-
-    textarea {
-      width: 100%;
-      height: 150px;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 14px;
-    }
-
-    button {
-      padding: 10px 15px;
-      font-size: 16px;
-      margin-top: 10px;
-      cursor: pointer;
-      border: none;
-      border-radius: 5px;
-    }
-
-    button:hover {
-      background-color: #ddd;
-    }
-
-    #analyze-btn {
-      background-color: #4CAF50;
-      color: white;
-    }
-
-    #clear-btn {
-      background-color: #f44336;
-      color: white;
-    }
-
-    .loader {
-      display: none;
-    }
-
-    .highlight {
-      color: #d9534f;
-    }
-
-    .tabs {
-      display: flex;
-      margin-bottom: 20px;
-    }
-
-    .nav-tab {
-      padding: 10px 20px;
-      margin-right: 10px;
-      cursor: pointer;
-      background-color: #ddd;
-      border-radius: 5px;
-    }
-
-    .nav-tab.active {
-      background-color: #4CAF50;
-      color: white;
-    }
-
-    .content-section {
-      display: none;
-    }
-
-    .content-section.active {
-      display: block;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Personal Website</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
-  <h1>Text Analysis and Tokenizer</h1>
-
-  <!-- Tab Navigation -->
-  <div class="tabs">
-    <div class="nav-tab active" data-target="analysis-tab">Text Analysis</div>
-    <div class="nav-tab" data-target="tokenizer-tab">Tokenizer</div>
-  </div>
-
-  <!-- Tab Content Sections -->
-  <div id="analysis-tab" class="content-section active">
-    <textarea id="text-input" placeholder="Enter your text here..."></textarea>
-    <div>
-      <button id="analyze-btn">Analyze Text</button>
-      <button id="clear-btn">Clear</button>
-    </div>
-    <div id="results">
-      <p id="result-text"></p>
-      <div id="basic-stats"></div>
-      <div id="pronouns-stats" class="result-box"></div>
-      <div id="prepositions-stats" class="result-box"></div>
-      <div id="articles-stats" class="result-box"></div>
+  <header>
+    <h1>Welcome to My Personal Website</h1>
+  </header>
+ <section id="about">
+  <h2>Who Am I?</h2>
+  <div class="profile-container">
+    <p>Hey, I’m Rushil, from Dubai. I’m studying CSE at IIIT Hyderabad, and I’m part of the Debate Club and the Music Club. I love a good debate — arguing over everything from philosophy to which AR Rahman album is the best. I’m also into football. And when I’m not doing that, I’m usually gaming or getting lost in a book. Tech-wise, I’m really interested in machine learning. There’s something cool about systems that can figure things out on their own. I’d like to work as a back-end engineer eventually, building stuff that’s efficient and actually useful. This blog’s just a space for me to share thoughts on whatever’s on my mind — football rants, music recommendations, random tech stuff, maybe even a deep dive into why “Kal Ho Naa Ho” is objectively perfect. </p>
+    <div class="profile-image">
+      <img src="images/profile.jpg" alt="Profile Picture" />
     </div>
   </div>
-
-  <div id="tokenizer-tab" class="content-section">
-    <h2>Text Tokenizer</h2>
-    <textarea id="tokenizer-input" placeholder="Enter text to tokenize..."></textarea>
-    <button id="tokenize-btn">Tokenize</button>
-    <div id="tokenized-result" class="result-box" style="display:none;"></div>
+</section>
+  
+  <section id="education">
+    <h2>Education</h2>
+    <ul>
+      <li>TMS Dubai - High School, 2010-2024</li>
+      <li>IIIT Hyderabad - Bachelors in CSE, 2028</li>
+      <li>Achievements: Error 404 not found</li>
+    </ul>
+  </section>
+  <section id="skills">
+    <h2>Technical Skills</h2>
+    <ul>
+      <li>Programming Languages: C, C++, Python, SQL</li>
+      <li>Web Development: HTML, CSS, JavaScript</li>
+      <li>Tools: Git, Linux</li>
+    </ul>
+  </section>
+<section id="cv">
+  <h2>My CV</h2>
+  <p>Download my CV here: <a href="cv.pdf" target="_blank">Download CV</a></p>
+  <p>Better formatted CV: <a href="https://shattereddisk.github.io/rickroll/rickroll.mp4" target="_blank">View Enhanced Version</a></p>
+</section>
+<section id="text-analysis">
+  <h2>Tokenizer</h2>
+  <textarea id="text-input" placeholder="Enter your text here (10,000+ words)..."></textarea>
+  <button id="analyze-btn">Analyze Text</button>
+  
+  <div id="results">
+    <div class="result-box" id="basic-stats"></div>
+    <div class="result-box" id="pronouns-stats"></div>
+    <div class="result-box" id="prepositions-stats"></div>
+    <div class="result-box" id="articles-stats"></div>
   </div>
-
-  <div class="loader">Loading...</div>
-
-  <script src="tokenizer.js"></script>
-
-  <script>
-    // Tab functionality
-    const tabs = document.querySelectorAll('.nav-tab');
-    const sections = document.querySelectorAll('.content-section');
-
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        const targetId = tab.getAttribute('data-target');
-        
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        
-        sections.forEach(section => {
-          section.classList.remove('active');
-          section.style.display = 'none';
-        });
-        
-        const targetSection = document.getElementById(targetId);
-        targetSection.style.display = 'block';
-        
-        setTimeout(() => {
-          targetSection.classList.add('active');
-        }, 50);
-      });
-    });
-  </script>
-
+</section>
+  <footer>
+    <p>&copy; 2025 Rushil. All rights reserved.</p>
+  </footer>
+<script src="script.js"></script>
 </body>
 </html>
+
