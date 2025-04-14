@@ -25,6 +25,11 @@ const clearBtn = document.getElementById('clear-btn');
 const resultsContainer = document.getElementById('results');
 const resultText = document.getElementById('result-text');
 
+// Tokenizer Inputs and Buttons
+const tokenizerInput = document.getElementById('tokenizer-input');
+const tokenizeBtn = document.getElementById('tokenize-btn');
+const tokenizedResult = document.getElementById('tokenized-result');
+
 // Function to analyze text
 function analyzeText() {
   const text = textInput.value.trim();
@@ -60,6 +65,20 @@ function analyzeText() {
     showResults("articles-stats", "Articles", countWords(text, ["a", "an", "the"]));
   }, 300);  // Simulated delay for processing
 }
+
+// Tokenize text on button click
+tokenizeBtn.addEventListener('click', function() {
+  const text = tokenizerInput.value.trim();
+  
+  if (text === "") {
+    alert("Please enter some text to tokenize.");
+    return;
+  }
+
+  const tokens = text.split(/\s+/);
+  tokenizedResult.innerHTML = `Tokens: <br>${tokens.join('<br>')}`;
+  tokenizedResult.style.display = 'block';
+});
 
 // Function to count occurrences of words in a list
 function countWords(text, wordList) {
@@ -126,12 +145,4 @@ window.addEventListener('load', function() {
   }
   
   // Event tracking for clicks
-  document.addEventListener('click', function(event) {
-    logEvent('click', event.target);
-  });
-  
-  // Initial empty analysis
-  setTimeout(() => {
-    analyzeText();
-  }, 1000);
-});
+  document.addEventListener('click', function(event)
