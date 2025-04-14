@@ -6,10 +6,10 @@ function toggleTheme() {
   
   if (isDarkMode) {
     body.classList.add('light-mode');
-    document.querySelector('.theme-toggle i').textContent = '🌙';
+    document.querySelector('.theme-toggle i').textContent = 'ðŸŒ™';
   } else {
     body.classList.remove('light-mode');
-    document.querySelector('.theme-toggle i').textContent = '☀️';
+    document.querySelector('.theme-toggle i').textContent = 'â˜€ï¸';
   }
   
   isDarkMode = !isDarkMode;
@@ -249,7 +249,7 @@ window.addEventListener('load', function() {
     isDarkMode = savedDarkMode === 'true';
     if (!isDarkMode) {
       document.body.classList.add('light-mode');
-      document.querySelector('.theme-toggle i').textContent = '🌙';
+      document.querySelector('.theme-toggle i').textContent = 'ðŸŒ™';
     }
   }
   
