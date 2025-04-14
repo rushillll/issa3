@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Text Tokenizer</title>
+  <title>Text Analysis and Tokenizer</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -49,13 +49,21 @@
       background-color: #f44336;
       color: white;
     }
+
+    .loader {
+      display: none;
+    }
+
+    .highlight {
+      color: #d9534f;
+    }
   </style>
 </head>
 <body>
 
-  <h1>Text Tokenizer</h1>
+  <h1>Text Analysis and Tokenizer</h1>
 
-  <!-- Text input area -->
+  <!-- Text input area for tokenizer -->
   <textarea id="text-input" placeholder="Enter your text here..."></textarea>
 
   <!-- Buttons to analyze and clear -->
@@ -64,10 +72,16 @@
     <button id="clear-btn">Clear</button>
   </div>
 
-  <!-- Results container -->
+  <!-- Results container for analysis -->
   <div id="results">
     <p id="result-text"></p>
+    <div id="basic-stats"></div>
+    <div id="pronouns-stats" class="result-box"></div>
+    <div id="prepositions-stats" class="result-box"></div>
+    <div id="articles-stats" class="result-box"></div>
   </div>
+
+  <div class="loader">Loading...</div>
 
   <script src="tokenizer.js"></script>
 
