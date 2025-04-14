@@ -3,65 +3,270 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Personal Website</title>
+  <title>Rushil | Personal Website</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <meta name="description" content="Rushil's personal website and portfolio - CSE student at IIIT Hyderabad">
 </head>
 <body>
+  <!-- Page loader -->
+  <div class="loader">
+    <div class="loader-inner"></div>
+  </div>
+
   <header>
     <h1>Welcome to My Personal Website</h1>
+    <p>CSE Student | Music Enthusiast | Football Fan</p>
   </header>
 
- <section id="about">
-  <h2>Who Am I?</h2>
-  <div class="profile-container">
-    <p>Hey, I’m Rushil, from Dubai. I’m studying CSE at IIIT Hyderabad, and I’m part of the Debate Club and the Music Club. I love a good debate — arguing over everything from philosophy to which AR Rahman album is the best. I’m also into football. And when I’m not doing that, I’m usually gaming or getting lost in a book. Tech-wise, I’m really interested in machine learning. There’s something cool about systems that can figure things out on their own. I’d like to work as a back-end engineer eventually, building stuff that’s efficient and actually useful. This blog’s just a space for me to share thoughts on whatever’s on my mind — football rants, music recommendations, random tech stuff, maybe even a deep dive into why “Kal Ho Naa Ho” is objectively perfect. </p>
-    <div class="profile-image">
-      <img src="images/profile.jpg" alt="Profile Picture" />
+  <!-- Navigation tabs -->
+  <nav>
+    <div class="nav-tabs">
+      <div class="nav-tab active" data-target="about-section">About Me</div>
+      <div class="nav-tab" data-target="skills-section">Skills</div>
+      <div class="nav-tab" data-target="education-section">Education</div>
+      <div class="nav-tab" data-target="cv-section">CV</div>
+      <div class="nav-tab" data-target="tokenizer-section">Tokenizer</div>
     </div>
-  </div>
-</section>
-  
-  <section id="education">
-    <h2>Education</h2>
-    <ul>
-      <li>TMS Dubai - High School, 2010-2024</li>
-      <li>IIIT Hyderabad - Bachelors in CSE, 2028</li>
-      <li>Achievements: Error 404 not found</li>
-    </ul>
-  </section>
+  </nav>
 
-  <section id="skills">
+  <!-- About section -->
+  <section id="about-section" class="content-section active">
+    <h2>Who Am I?</h2>
+    <div class="profile-container">
+      <p>Hey, I'm Rushil, from Dubai. I'm studying CSE at IIIT Hyderabad, and I'm part of the Debate Club and the Music Club. I love a good debate — arguing over everything from philosophy to which AR Rahman album is the best. I'm also into football. And when I'm not doing that, I'm usually gaming or getting lost in a book. Tech-wise, I'm really interested in machine learning. There's something cool about systems that can figure things out on their own. I'd like to work as a back-end engineer eventually, building stuff that's efficient and actually useful. This blog's just a space for me to share thoughts on whatever's on my mind — football rants, music recommendations, random tech stuff, maybe even a deep dive into why "Kal Ho Naa Ho" is objectively perfect.</p>
+      <div class="profile-image">
+        <img src="images/profile.jpg" alt="Profile Picture" />
+      </div>
+    </div>
+    
+    <div class="social-icons">
+      <a href="#" class="social-icon" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    </div>
+  </section>
+  
+  <!-- Skills section -->
+  <section id="skills-section" class="content-section">
     <h2>Technical Skills</h2>
-    <ul>
-      <li>Programming Languages: C, C++, Python, SQL</li>
-      <li>Web Development: HTML, CSS, JavaScript</li>
-      <li>Tools: Git, Linux</li>
-    </ul>
+    <div class="skills-container">
+      <div class="skill-category">
+        <h3>Programming Languages</h3>
+        <div class="skill-item">
+          <div class="skill-name">C/C++</div>
+          <div class="skill-bar">
+            <div class="skill-progress" data-progress="85"></div>
+          </div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">Python</div>
+          <div class="skill-bar">
+            <div class="skill-progress" data-progress="90"></div>
+          </div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">SQL</div>
+          <div class="skill-bar">
+            <div class="skill-progress" data-progress="75"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="skill-category">
+        <h3>Web Development</h3>
+        <div class="skill-item">
+          <div class="skill-name">HTML</div>
+          <div class="skill-bar">
+            <div class="skill-progress" data-progress="95"></div>
+          </div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">CSS</div>
+          <div class="skill-bar">
+            <div class="skill-progress" data-progress="85"></div>
+          </div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">JavaScript</div>
+          <div class="skill-bar">
+            <div class="skill-progress" data-progress="80"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="skill-category">
+        <h3>Tools & Technologies</h3>
+        <div class="skill-item">
+          <div class="skill-name">Git</div>
+          <div class="skill-bar">
+            <div class="skill-progress" data-progress="85"></div>
+          </div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">Linux</div>
+          <div class="skill-bar">
+            <div class="skill-progress" data-progress="70"></div>
+          </div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">Docker</div>
+          <div class="skill-bar">
+            <div class="skill-progress" data-progress="60"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="skill-category">
+        <h3>Soft Skills</h3>
+        <div class="skill-item">
+          <div class="skill-name">Problem Solving</div>
+          <div class="skill-bar">
+            <div class="skill-progress" data-progress="90"></div>
+          </div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">Team Work</div>
+          <div class="skill-bar">
+            <div class="skill-progress" data-progress="85"></div>
+          </div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">Communication</div>
+          <div class="skill-bar">
+            <div class="skill-progress" data-progress="80"></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
-
-<section id="cv">
-  <h2>My CV</h2>
-  <p>Download my CV here: <a href="cv.pdf" target="_blank">Download CV</a></p>
-  <p>Better formatted CV: <a href="https://shattereddisk.github.io/rickroll/rickroll.mp4" target="_blank">View Enhanced Version</a></p>
-</section>
-
-<section id="text-analysis">
-  <h2>Tokenizer</h2>
-  <textarea id="text-input" placeholder="Enter your text here (10,000+ words)..."></textarea>
-  <button id="analyze-btn">Analyze Text</button>
   
-  <div id="results">
-    <div class="result-box" id="basic-stats"></div>
-    <div class="result-box" id="pronouns-stats"></div>
-    <div class="result-box" id="prepositions-stats"></div>
-    <div class="result-box" id="articles-stats"></div>
-  </div>
-</section>
-
+  <!-- Education section -->
+  <section id="education-section" class="content-section">
+    <h2>Education</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-icon">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <div class="timeline-content">
+          <h3>IIIT Hyderabad</h3>
+          <p class="timeline-date">2024 - 2028 (Expected)</p>
+          <p>Bachelors in Computer Science and Engineering</p>
+          <ul class="timeline-details">
+            <li>First year student</li>
+            <li>Member of Debate Club</li>
+            <li>Member of Music Club</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-icon">
+          <i class="fas fa-school"></i>
+        </div>
+        <div class="timeline-content">
+          <h3>TMS Dubai</h3>
+          <p class="timeline-date">2010 - 2024</p>
+          <p>High School Diploma</p>
+          <ul class="timeline-details">
+            <li>Class Valedictorian</li>
+            <li>Captain of the School Debate Team</li>
+            <li>Achievements: Error 404 not found</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- CV section -->
+  <section id="cv-section" class="content-section">
+    <h2>My CV</h2>
+    <div class="cv-cards">
+      <div class="cv-card">
+        <div class="cv-card-icon">
+          <i class="fas fa-file-pdf"></i>
+        </div>
+        <h3>Standard CV</h3>
+        <p>Download my standard CV in PDF format</p>
+        <a href="cv.pdf" target="_blank" class="cv-download-btn">
+          <i class="fas fa-download"></i> Download CV
+        </a>
+      </div>
+      
+      <div class="cv-card">
+        <div class="cv-card-icon">
+          <i class="fas fa-file-alt"></i>
+        </div>
+        <h3>Enhanced Version</h3>
+        <p>View my better formatted interactive CV</p>
+        <a href="https://shattereddisk.github.io/rickroll/rickroll.mp4" target="_blank" class="cv-download-btn">
+          <i class="fas fa-eye"></i> View Enhanced Version
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Tokenizer section -->
+  <section id="tokenizer-section" class="content-section">
+    <h2>Tokenizer</h2>
+    <p class="section-intro">Analyze your text to count words, letters, and identify parts of speech.</p>
+    
+    <div class="text-input-container">
+      <textarea id="text-input" placeholder="Enter your text here (10,000+ words)..."></textarea>
+      <div class="input-actions">
+        <button id="clear-btn" class="secondary-btn">
+          <i class="fas fa-trash-alt"></i> Clear
+        </button>
+        <button id="analyze-btn">
+          <i class="fas fa-cog"></i> Analyze Text
+        </button>
+      </div>
+    </div>
+    
+    <div id="results">
+      <div class="result-box" id="basic-stats"></div>
+      <div class="result-box" id="pronouns-stats"></div>
+      <div class="result-box" id="prepositions-stats"></div>
+      <div class="result-box" id="articles-stats"></div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
   <footer>
-    <p>&copy; 2025 Rushil. All rights reserved.</p>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <p><i class="fas fa-envelope"></i> rushil@example.com</p>
+        <p><i class="fas fa-map-marker-alt"></i> Hyderabad, India</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <a href="#about-section">About</a>
+        <a href="#skills-section">Skills</a>
+        <a href="#education-section">Education</a>
+      </div>
+      <div class="footer-section">
+        <h3>Follow Me</h3>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-github"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Rushil. All rights reserved.</p>
+    </div>
   </footer>
-<script src="script.js"></script>
+  
+  <!-- Theme toggle -->
+  <div class="theme-toggle" onclick="toggleTheme()">
+    <i class="fas fa-sun"></i>
+  </div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
 </body>
 </html>
-
