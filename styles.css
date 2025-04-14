@@ -123,8 +123,6 @@ section {
   transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
   position: relative;
   overflow: hidden;
-  opacity: 0;
-  transform: translateY(20px);
 }
 
 section:hover {
@@ -359,12 +357,32 @@ p, li {
 
 #results {
   margin-top: 30px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 25px;
+  display: none;
 }
 
-.result-box {
-  background-color: rgba(24, 24, 24, 0.9);
-  padding: 25px;
- 
+#results p {
+  font-size: 1.1rem;
+}
+
+@keyframes pulse {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(30, 30);
+    opacity: 0;
+  }
+}
