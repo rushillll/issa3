@@ -476,6 +476,115 @@ li:hover:before {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+/* Skills section - card style */
+.skills-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.skill-card {
+  background-color: #242424;
+  border-radius: 12px;
+  padding: 25px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(to right, #1DB954, #26e467);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+}
+
+.skill-card:hover::before {
+  transform: scaleX(1);
+}
+
+.skill-icon {
+  font-size: 2.5rem;
+  color: #1DB954;
+  margin-bottom: 15px;
+  transition: transform 0.5s ease;
+}
+
+.skill-card:hover .skill-icon {
+  transform: scale(1.2);
+}
+
+.skill-card h3 {
+  color: #e0e0e0;
+  margin: 15px 0;
+  transition: color 0.3s ease;
+}
+
+.skill-card:hover h3 {
+  color: #1DB954;
+}
+
+.skill-list {
+  text-align: left;
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0;
+}
+
+.skill-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  color: #b3b3b3;
+  font-weight: 500;
+  transition: transform 0.3s ease;
+  padding-left: 0;
+}
+
+.skill-list li:before {
+  content: none;
+}
+
+.skill-list li:hover {
+  transform: translateX(5px);
+  color: #ffffff;
+}
+
+.skill-tag {
+  background-color: rgba(29, 185, 84, 0.2);
+  color: #1DB954;
+  font-size: 0.8rem;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.skill-list li:hover .skill-tag {
+  background-color: rgba(29, 185, 84, 0.4);
+}
+
+@media (max-width: 768px) {
+  .skills-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .pdf-container {
