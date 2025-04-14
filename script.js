@@ -120,4 +120,3 @@ function showResults(boxId, title, wordCounts) {
 // Initial empty analysis
 analyzeText();
 
-this is script. js
