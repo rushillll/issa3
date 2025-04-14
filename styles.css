@@ -15,7 +15,8 @@
   --border-color: #535353;
   --input-bg: #282828;
   --transition-speed: 0.3s;
-  --glow: 0 0 10px rgba(29, 185, 84, 0.5);
+  --glow: 0 0 15px rgba(29, 185, 84, 0.6);
+  --shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
 }
 
 body {
@@ -39,21 +40,21 @@ nav {
   backdrop-filter: blur(10px);
   display: flex;
   justify-content: center;
-  padding: 15px 0;
+  padding: 20px 0;
   margin-bottom: 25px;
   border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow);
 }
 
 .nav-tabs {
   display: flex;
-  gap: 10px;
+  gap: 15px;
 }
 
 .nav-tab {
-  padding: 10px 20px;
+  padding: 12px 24px;
   cursor: pointer;
-  border-radius: 25px;
+  border-radius: 30px;
   color: var(--text-secondary);
   font-weight: 600;
   transition: all var(--transition-speed) ease;
@@ -75,6 +76,9 @@ nav {
 
 .nav-tab:hover {
   color: var(--text-main);
+  background-color: rgba(29, 185, 84, 0.1);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
 }
 
 .nav-tab:hover::before {
@@ -94,11 +98,11 @@ header {
   background: linear-gradient(135deg, #1DB954 0%, #0E5C2B 100%);
   color: var(--text-main);
   text-align: center;
-  padding: 40px 20px;
+  padding: 50px 20px;
   border-radius: 12px;
   font-weight: 700;
   letter-spacing: -0.04em;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow);
   position: relative;
   overflow: hidden;
 }
@@ -110,7 +114,7 @@ header::before {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 80%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 80%);
   animation: pulse 15s infinite linear;
 }
 
@@ -119,31 +123,21 @@ section {
   padding: 30px;
   background-color: var(--card-bg);
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow);
   transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
   position: relative;
   overflow: hidden;
-  opacity: 1; /* Show immediately */
-  transform: none; /* No translation */
 }
 
 section:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
-}
-
-.content-section {
-  display: none;
-}
-
-.content-section.active {
-  display: block;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
 }
 
 h1 {
-  font-size: 2.8rem;
-  margin-bottom: 20px;
-  letter-spacing: -0.04em;
+  font-size: 3rem;
+  margin-bottom: 25px;
+  letter-spacing: -0.05em;
   font-weight: 900;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   position: relative;
@@ -153,10 +147,10 @@ h1 {
 h1::after {
   content: '';
   position: absolute;
-  width: 50%;
+  width: 60%;
   height: 4px;
   bottom: -10px;
-  left: 25%;
+  left: 20%;
   background-color: white;
   border-radius: 2px;
 }
@@ -214,13 +208,13 @@ p, li {
   overflow: hidden;
   border: 4px solid var(--primary);
   position: relative;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow);
   transition: transform 0.5s ease, box-shadow 0.3s ease;
 }
 
 .profile-image:hover {
-  transform: rotate(5deg) scale(1.05);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 0 8px rgba(29, 185, 84, 0.2);
+  transform: rotate(5deg) scale(1.1);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 0 8px rgba(29, 185, 84, 0.2);
 }
 
 .profile-image img {
@@ -260,10 +254,12 @@ p, li {
   text-decoration: none;
   font-weight: 700;
   transition: all 0.2s ease;
-  padding: 5px 10px;
-  border-radius: 4px;
+  padding: 12px 25px;
+  border-radius: 50px;
   position: relative;
   z-index: 1;
+  background: var(--primary);
+  box-shadow: 0 4px 20px rgba(29, 185, 84, 0.3);
 }
 
 #cv a::before {
@@ -273,14 +269,16 @@ p, li {
   left: 0;
   width: 100%;
   height: 0;
-  background-color: rgba(29, 185, 84, 0.1);
+  background-color: rgba(29, 185, 84, 0.2);
   transition: height 0.2s ease;
   z-index: -1;
-  border-radius: 4px;
+  border-radius: 50px;
 }
 
 #cv a:hover {
-  color: var(--primary-hover);
+  color: var(--text-main);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(29, 185, 84, 0.4);
 }
 
 #cv a:hover::before {
@@ -320,17 +318,18 @@ p, li {
   background: linear-gradient(to right, var(--primary), var(--primary-hover));
   color: white;
   border: none;
-  padding: 12px 30px;
-  border-radius: 30px;
+  padding: 14px 32px;
+  border-radius: 50px;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.2rem;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(29, 185, 84, 0.3);
+  box-shadow: 0 4px 20px rgba(29, 185, 84, 0.3);
 }
 
 #analyze-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 7px 20px rgba
+  box-shadow: 0 7px 25px rgba(29, 185, 84, 0.4);
+}
