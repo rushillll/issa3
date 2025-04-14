@@ -448,7 +448,7 @@ li {
 }
 
 li:before {
-  content: "•";
+  content: "â€¢";
   color: var(--primary);
   position: absolute;
   left: 0;
