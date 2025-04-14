@@ -57,33 +57,97 @@
     .highlight {
       color: #d9534f;
     }
+
+    .tabs {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    .nav-tab {
+      padding: 10px 20px;
+      margin-right: 10px;
+      cursor: pointer;
+      background-color: #ddd;
+      border-radius: 5px;
+    }
+
+    .nav-tab.active {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .content-section {
+      display: none;
+    }
+
+    .content-section.active {
+      display: block;
+    }
   </style>
 </head>
 <body>
 
   <h1>Text Analysis and Tokenizer</h1>
 
-  <!-- Text input area for tokenizer -->
-  <textarea id="text-input" placeholder="Enter your text here..."></textarea>
-
-  <!-- Buttons to analyze and clear -->
-  <div>
-    <button id="analyze-btn">Analyze Text</button>
-    <button id="clear-btn">Clear</button>
+  <!-- Tab Navigation -->
+  <div class="tabs">
+    <div class="nav-tab active" data-target="analysis-tab">Text Analysis</div>
+    <div class="nav-tab" data-target="tokenizer-tab">Tokenizer</div>
   </div>
 
-  <!-- Results container for analysis -->
-  <div id="results">
-    <p id="result-text"></p>
-    <div id="basic-stats"></div>
-    <div id="pronouns-stats" class="result-box"></div>
-    <div id="prepositions-stats" class="result-box"></div>
-    <div id="articles-stats" class="result-box"></div>
+  <!-- Tab Content Sections -->
+  <div id="analysis-tab" class="content-section active">
+    <textarea id="text-input" placeholder="Enter your text here..."></textarea>
+    <div>
+      <button id="analyze-btn">Analyze Text</button>
+      <button id="clear-btn">Clear</button>
+    </div>
+    <div id="results">
+      <p id="result-text"></p>
+      <div id="basic-stats"></div>
+      <div id="pronouns-stats" class="result-box"></div>
+      <div id="prepositions-stats" class="result-box"></div>
+      <div id="articles-stats" class="result-box"></div>
+    </div>
+  </div>
+
+  <div id="tokenizer-tab" class="content-section">
+    <h2>Text Tokenizer</h2>
+    <textarea id="tokenizer-input" placeholder="Enter text to tokenize..."></textarea>
+    <button id="tokenize-btn">Tokenize</button>
+    <div id="tokenized-result" class="result-box" style="display:none;"></div>
   </div>
 
   <div class="loader">Loading...</div>
 
   <script src="tokenizer.js"></script>
+
+  <script>
+    // Tab functionality
+    const tabs = document.querySelectorAll('.nav-tab');
+    const sections = document.querySelectorAll('.content-section');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const targetId = tab.getAttribute('data-target');
+        
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        sections.forEach(section => {
+          section.classList.remove('active');
+          section.style.display = 'none';
+        });
+        
+        const targetSection = document.getElementById(targetId);
+        targetSection.style.display = 'block';
+        
+        setTimeout(() => {
+          targetSection.classList.add('active');
+        }, 50);
+      });
+    });
+  </script>
 
 </body>
 </html>
