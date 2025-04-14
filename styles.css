@@ -461,19 +461,25 @@ li:hover:before {
 
 .cv-button {
   background-color: #1DB954;
-  color: white;
+  color: white;           /* Making sure text is white for contrast */
   text-decoration: none;
   padding: 12px 25px;
   border-radius: 25px;
   font-weight: bold;
   transition: all 0.3s ease;
   display: inline-block;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Adding text shadow for better visibility */
 }
 
 .cv-button:hover {
   background-color: #1ED760;
   transform: translateY(-3px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Make sure the icon has proper contrast as well */
+.cv-button i {
+  margin-right: 5px;
 }
 
 /* Skills section - card style */
