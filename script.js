@@ -1,148 +1,228 @@
+```javascript
 // Theme toggle functionality
 let isDarkMode = true;
-
 function toggleTheme() {
   const body = document.body;
-  
   if (isDarkMode) {
     body.classList.add('light-mode');
-    document.querySelector('.theme-toggle i').textContent = '🌙';
+    document.querySelector('.theme-toggle i').textContent = '☀️';
   } else {
     body.classList.remove('light-mode');
-    document.querySelector('.theme-toggle i').textContent = '☀️';
+    document.querySelector('.theme-toggle i').textContent = '🌙';
   }
-  
   isDarkMode = !isDarkMode;
-  
   // Save preference
   localStorage.setItem('darkMode', isDarkMode ? 'true' : 'false');
 }
+// Tab functionality
+function initTabs() {
+  const tabs = document.querySelectorAll('.nav-tab');
+  const sections = document.querySelectorAll('.content-section');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const targetId = tab.getAttribute('data-target');
 
-// Tokenizer: Tokenize and display words
+      // Update active tab
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      // Show target section
+      sections.forEach(section => {
+        section.classList.remove('active');
+        section.style.display = 'none';
+      });
+
+      const targetSection = document.getElementById(targetId);
+      targetSection.style.display = 'block';
+      targetSection.classList.add('active');
+      // Make elements visible immediately
+      const elements = targetSection.querySelectorAll('h2, p, li, .result-box, .skill-category');
+      elements.forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      });
+    });
+  });
+}
+function animateSectionElements(section) {
+  // This function is now empty as we are removing animations
+}
+// Initialize skill bars
+function initSkillBars() {
+  const skillBars = document.querySelectorAll('.skill-progress');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const progressBar = entry.target;
+        const percentage = progressBar.getAttribute('data-progress') + '%';
+        progressBar.style.width = percentage;
+        observer.unobserve(progressBar);
+      }
+    });
+  }, { threshold: 0.2 });
+  skillBars.forEach(bar => {
+    observer.observe(bar);
+  });
+}
+// Event tracking functionality
+function logEvent(eventType, element) {
+  const timestamp = new Date().toISOString();
+  let objectType = 'Unknown';
+  if (element.tagName === 'IMG') {
+    objectType = 'Image';
+  }
+  else if (element.tagName === 'A') {
+    if (element.href && element.href.endsWith('.pdf')) {
+      objectType = 'PDF Link';
+    } else {
+      objectType = 'Link';
+    }
+  }
+  else if (element.tagName === 'P') {
+    objectType = 'Paragraph';
+  }
+  else if (element.tagName === 'H1' || element.tagName === 'H2') {
+    objectType = 'Header';
+  }
+  else if (element.tagName === 'UL' || element.tagName === 'LI') {
+    objectType = 'List Item';
+  }
+  else if (element.tagName === 'BUTTON') {
+    objectType = 'Button';
+  }
+  else if (element.tagName === 'INPUT') {
+    objectType = 'Input';
+  }
+  else if (element.tagName === 'SELECT') {
+    objectType = 'Dropdown';
+  }
+  else if (element.classList.contains('nav-tab')) {
+    objectType = 'Navigation Tab';
+  }
+  console.log(`${timestamp}, ${eventType}, ${objectType}`);
+}
+// Text analysis functionality
 const textInput = document.getElementById('text-input');
 const analyzeBtn = document.getElementById('analyze-btn');
-const clearBtn = document.getElementById('clear-btn');
-const resultsContainer = document.getElementById('results');
-const resultText = document.getElementById('result-text');
-
-// Tokenizer Inputs and Buttons
-const tokenizerInput = document.getElementById('tokenizer-input');
-const tokenizeBtn = document.getElementById('tokenize-btn');
-const tokenizedResult = document.getElementById('tokenized-result');
-
-// Function to analyze text
+// Real-time analysis on input with debounce
+let debounceTimer;
+textInput.addEventListener('input', () => {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(analyzeText, 500);
+});
+// Optional: Keep button for manual analysis
+analyzeBtn.addEventListener('click', () => {
+  analyzeText();
+  // Remove button click animation
+  analyzeBtn.classList.remove('clicked');
+});
 function analyzeText() {
-  const text = textInput.value.trim();
-  
-  if (text === "") {
-    alert("Please enter some text to analyze.");
-    return;
-  }
-
+  const text = textInput.value;
   // Show loading animation
   document.querySelector('.loader').style.display = 'flex';
-  
   setTimeout(() => {
-    const tokens = text.split(/\s+/);  // Tokenize by spaces
-    const wordCount = tokens.length;
-    
-    // Display results
-    resultsContainer.style.display = 'block';
-    resultText.innerHTML = `Tokenized Words: <br>${tokens.join('<br>')}`;
-    
-    document.querySelector('.loader').style.display = 'none';
-    
-    // Additional analysis here (letters, spaces, etc.)
-    const letterCount = text.replace(/[^a-zA-Z]/g, "").length;
+    const letterCount = text.replace(/[^a-z]/gi, "").length;
+    const wordCount = text.trim() === "" ? 0 : text.trim().split(/\s+/).length;
     const spaceCount = (text.match(/ /g) || []).length;
     const newlineCount = (text.match(/\n/g) || []).length;
-    
-    showBasicStats(letterCount, wordCount, spaceCount, newlineCount);
-    
-    // Optional: Pronoun, preposition, and article analysis
-    showResults("pronouns-stats", "Pronouns", countWords(text, ["i", "you", "he", "she", "it", "we", "they"]));
-    showResults("prepositions-stats", "Prepositions", countWords(text, ["in", "on", "at", "by", "for", "with", "about"]));
-    showResults("articles-stats", "Articles", countWords(text, ["a", "an", "the"]));
-  }, 300);  // Simulated delay for processing
+    const specialCharCount = text.replace(/[a-z0-9\s]/gi, "").length;
+
+    const pronouns = ["i", "you", "he", "she", "it", "we", "they", "me", "him", "her", "us", "them"];
+    const prepositions = ["in", "on", "at", "by", "for", "with", "about", "between", "above", "below"];
+    const articles = ["a", "an", "the"];
+
+    const pronounCounts = countWords(text, pronouns);
+    const prepositionCounts = countWords(text, prepositions);
+    const articleCounts = countWords(text, articles);
+
+    // Hide loading animation
+    document.querySelector('.loader').style.display = 'none';
+
+    showBasicStats(letterCount, wordCount, spaceCount, newlineCount, specialCharCount);
+    showResults("pronouns-stats", "Pronouns", pronounCounts);
+    showResults("prepositions-stats", "Prepositions", prepositionCounts);
+    showResults("articles-stats", "Articles", articleCounts);
+
+    // Results are now visible immediately
+  }, 300); // Simulated processing time
 }
-
-// Tokenize text on button click
-tokenizeBtn.addEventListener('click', function() {
-  const text = tokenizerInput.value.trim();
-  
-  if (text === "") {
-    alert("Please enter some text to tokenize.");
-    return;
-  }
-
-  const tokens = text.split(/\s+/);
-  tokenizedResult.innerHTML = `Tokens: <br>${tokens.join('<br>')}`;
-  tokenizedResult.style.display = 'block';
-});
-
-// Function to count occurrences of words in a list
 function countWords(text, wordList) {
   const counts = {};
   const allWords = text.toLowerCase().match(/\b\w+\b/g) || [];
-  
   wordList.forEach(word => {
     counts[word] = allWords.filter(w => w === word).length;
   });
-  
   return counts;
 }
-
-function showBasicStats(letters, words, spaces, newlines) {
+function showBasicStats(letters, words, spaces, newlines, specials) {
   document.getElementById('basic-stats').innerHTML = `
     <h3>Basic Counts</h3>
     <div class="result-item"><span>Letters:</span> <span class="highlight">${letters}</span></div>
     <div class="result-item"><span>Words:</span> <span class="highlight">${words}</span></div>
     <div class="result-item"><span>Spaces:</span> <span class="highlight">${spaces}</span></div>
     <div class="result-item"><span>Newlines:</span> <span class="highlight">${newlines}</span></div>
+    <div class="result-item"><span>Special Chars:</span> <span class="highlight">${specials}</span></div>
   `;
 }
-
 function showResults(boxId, title, wordCounts) {
   let html = `<h3>${title}</h3>`;
   let hasResults = false;
-  
   // Sort by count (descending)
   const sortedEntries = Object.entries(wordCounts).sort((a, b) => b[1] - a[1]);
-  
   for (const [word, count] of sortedEntries) {
     if (count > 0) {
       html += `<div class="result-item"><span>${word}:</span> <span class="highlight">${count}</span></div>`;
       hasResults = true;
     }
   }
-  
   if (!hasResults) html += `<div>No ${title.toLowerCase()} found</div>`;
-  
   document.getElementById(boxId).innerHTML = html;
 }
-
-// Event listeners for buttons
-analyzeBtn.addEventListener('click', analyzeText);
-clearBtn.addEventListener('click', () => {
-  textInput.value = ''; // Clear the input field
-  resultsContainer.style.display = 'none'; // Hide the results
-});
-
-// Event tracking
-function logEvent(eventType, element) {
-  const timestamp = new Date().toISOString();
-  console.log(`${timestamp}, ${eventType}, ${element.tagName}`);
+function animateResults() {
+  // This function is now empty as we are removing animations
 }
-
-// Page load setup
+// Page load animations
 window.addEventListener('load', function() {
+  // Remove animations from sections
+  const sections = document.querySelectorAll('section');
+  sections.forEach((section, index) => {
+    section.style.opacity = '1';
+    section.style.transform = 'translateY(0)';
+  });
+  // Setup theme based on local storage
   const savedDarkMode = localStorage.getItem('darkMode');
   if (savedDarkMode) {
     isDarkMode = savedDarkMode === 'true';
     if (!isDarkMode) {
       document.body.classList.add('light-mode');
+      document.querySelector('.theme-toggle i').textContent = '☀️';
     }
   }
-  
-  // Event tracking for clicks
-  document.addEventListener('click', function(event)
+  // Initialize tabs
+  initTabs();
+  // Initialize skill bars
+  initSkillBars();
+  // Show first tab by default
+  const firstTab = document.querySelector('.nav-tab');
+  if (firstTab) {
+    firstTab.click();
+  }
+  // Event tracking
+  let allElements = document.querySelectorAll('*');
+  for (let i = 0; i < allElements.length; i++) {
+    logEvent('view', allElements[i]);
+  }
+  // Remove loader
+  setTimeout(() => {
+    document.querySelector('.loader').style.display = 'none';
+  }, 800);
+});
+// Track click events
+document.addEventListener('click', function(event) {
+  logEvent('click', event.target);
+});
+// Initial empty analysis
+setTimeout(() => {
+  analyzeText();
+}, 1000);
+```
